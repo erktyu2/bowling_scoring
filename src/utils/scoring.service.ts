@@ -65,19 +65,10 @@ export class ScoringService {
 
         frame.Score = totalKnockedPins;
 
-        // if invalid roll return null
-        if ( (!isLastFrame && totalKnockedPins > 10) ||
-            (isLastFrame && totalKnockedPins > 10 && frame.Rolls.length < 3) ||
-            (isLastFrame && totalKnockedPins > 30 && frame.Rolls.length === 3) ||
-            totalKnockedPins < 0 || !Number.isInteger(totalKnockedPins) ||
-            (totalKnockedPins <= 11 && frame.Rolls.length > 2) || frame.Rolls.length > 3 ||
-            (frame.Rolls.length > 2 && (frame.Rolls[0] + frame.Rolls[1]) < 10)
-        ) {
+        if ( !this.isRecalculatedValuesValid(isLastFrame, totalKnockedPins, frame)) {
             game.Invalid = true;
-            return game;
         } else if (frame.Rolls.length === 3 || (isLastFrame && totalKnockedPins < 10 && frame.Rolls.length === 2)){
             game.Ended = true;
-            return game;
         } else if (totalKnockedPins === 10 && !isLastFrame){
             if (frame.Rolls.length === 1){
                 frame.IsStrike = true;
@@ -89,6 +80,7 @@ export class ScoringService {
         return game;
     }
 
+
     private static calculateScores(game: Game): Game {
         game.Frames = game.Frames.reduce((frames, currentFrame, index) => {
             frames = [...frames, currentFrame]
@@ -98,7 +90,7 @@ export class ScoringService {
                 const previousFrame: Frame = frames[index - 1];
                 if (previousFrame.IsSpare){
                     previousFrame.Score = currentFrame.Rolls[0] + 10;
-                } else if(currentFrame.IsStrike && previousFrame.IsStrike) {
+                } else if((currentFrame.IsStrike && previousFrame.IsStrike) || (currentFrame.IsSpare && previousFrame.IsStrike) ) {
                     previousFrame.Score = 20;
                 }
 
@@ -116,5 +108,15 @@ export class ScoringService {
         game.Score = game.Frames.reduce(((total, frame) => total + frame.Score), 0)
 
         return game;
+    }
+
+
+    private static isRecalculatedValuesValid (isLastFrame: boolean, totalKnockedPins: number, frame: Frame): boolean {
+        return (!isLastFrame && totalKnockedPins > 10) ||
+            (isLastFrame && totalKnockedPins > 10 && frame.Rolls.length < 3) ||
+            (isLastFrame && totalKnockedPins > 30 && frame.Rolls.length === 3) ||
+            totalKnockedPins < 0 || !Number.isInteger(totalKnockedPins) ||
+            (totalKnockedPins <= 11 && frame.Rolls.length > 2) || frame.Rolls.length > 3 ||
+            (frame.Rolls.length > 2 && (frame.Rolls[0] + frame.Rolls[1]) < 10);
     }
 }

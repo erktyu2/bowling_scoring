@@ -24,4 +24,5 @@ router.post('/score', (request: Request, response: Response, next: NextFunction)
 
     response.json(game);
 })
+
 export { router as GameRouter };

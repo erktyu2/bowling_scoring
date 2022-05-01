@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config({path: `${__dirname}/../config/.env`});
 
 const app: Express = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 4000;
 
 app.get('/', (request: Request, response: Response, next: NextFunction) => {
     response.send('This is a bowling game API-Server');

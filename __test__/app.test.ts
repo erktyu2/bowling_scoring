@@ -14,8 +14,8 @@ beforeAll(() => {
     httpTerminator = createHttpTerminator({ server: httpServer })
 })
 
-afterAll(()=>{
-    httpTerminator.terminate().then()
+afterAll((done: DoneCallback)=>{
+    httpTerminator.terminate().then(()=>{ done(); })
 })
 
 
@@ -32,13 +32,16 @@ describe('server test', ()=>{
     });
 })
 
-describe('router test', ()=>{
-    it('should check GameRouter is up', (done: DoneCallback) => {
+describe('GameRouter-routes', ()=>{
+    const route: string = "/game"
+
+    it('should check GameRouter up and responding', (done: DoneCallback) => {
         request(express)
-            .get('/game')
+            .get(route + '/')
             .expect(200)
             .end((err, response: Response) => {
                 if (err) return done(err);
+                expect(response.text).toBe('this is game');
                 done()
             })
     });
