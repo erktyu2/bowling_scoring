@@ -14,6 +14,7 @@ This repository includes both frontend and backend server. Backend server runs d
 Frontend server runs on port 4200.
 
 Backend: Nodejs, ts-node( TypeScript), Expressjs
+
 Frontend: Angular 12
 
 ***
