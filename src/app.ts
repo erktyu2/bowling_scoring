@@ -15,7 +15,7 @@ app.get('/', (request: Request, response: Response, next: NextFunction) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/game', GameRouter);
+app.use('/api/game', GameRouter);
 
 const server = app.listen(port, () => {
     console.log(`Server is running at localhost:${port}`);

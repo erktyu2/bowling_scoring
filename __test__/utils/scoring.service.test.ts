@@ -63,4 +63,10 @@ describe('Scoring Service - calculateGame()', ()=>{
         expect(returnedGame.Score).toBe(60);
     });
 
+    it('should output 300 when perfect series (12 strikes) ', function () {
+        const roll: number[] = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
+        const returnedGame: Game = ScoringService.calculateGame(roll);
+        expect(returnedGame.Score).toBe(300);
+    });
+
 })

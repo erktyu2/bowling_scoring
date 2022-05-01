@@ -102,4 +102,11 @@ dist
 
 # TernJS port file
 .tern-port
+
+.idea
 /bin/
+
+/frontend/node_modules
+/frontend/.gitignore
+/frontend/README.md
+/frontend/

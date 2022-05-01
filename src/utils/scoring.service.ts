@@ -82,20 +82,23 @@ export class ScoringService {
     private static calculateScores(game: Game): Game {
         game.Frames = game.Frames.reduce((frames, currentFrame, index) => {
             frames = [...frames, currentFrame]
-
-            if (frames.length > 1 && frames.length < 10) {
+            if (frames.length > 1) {
 
                 const previousFrame: Frame = frames[index - 1];
+
                 if (previousFrame.IsSpare){
-                    previousFrame.Score = currentFrame.Rolls[0] + 10;
-                } else if((currentFrame.IsStrike && previousFrame.IsStrike) || (currentFrame.IsSpare && previousFrame.IsStrike) ) {
-                    previousFrame.Score = 20;
+                    previousFrame.Score = 10 + currentFrame.Rolls[0];
+                } else if (previousFrame.IsStrike && (!currentFrame.IsStrike || frames.length === 10)) {
+                    previousFrame.Score = 10 + currentFrame.Rolls[0] + currentFrame.Rolls[1];
+                    previousFrame.Score = isNaN(previousFrame.Score) ? 0 : previousFrame.Score;
                 }
 
                 if (frames.length > 2){
+
                     const twoPreviousFrame: Frame = frames[index - 2];
-                    if (currentFrame.IsStrike && previousFrame.IsStrike && twoPreviousFrame.IsStrike){
-                        twoPreviousFrame.Score = 30;
+
+                    if (twoPreviousFrame.IsStrike && previousFrame.IsStrike) {
+                        twoPreviousFrame.Score = 20 + currentFrame.Rolls[0];
                     }
                 }
             }
@@ -110,7 +113,7 @@ export class ScoringService {
 
     private static isRecalculatedValuesInvalid (isLastFrame: boolean, totalKnockedPins: number, frame: Frame): boolean {
         return (!isLastFrame && totalKnockedPins > 10) ||
-            (isLastFrame && totalKnockedPins > 10 && frame.Rolls.length < 3) ||
+            (isLastFrame && totalKnockedPins > 10 && frame.Rolls.length < 3 && frame.Rolls[0] !== 10) ||
             (isLastFrame && totalKnockedPins > 30 && frame.Rolls.length === 3) ||
             totalKnockedPins < 0 || !Number.isInteger(totalKnockedPins) ||
             (totalKnockedPins <= 11 && frame.Rolls.length > 2) || frame.Rolls.length > 3 ||

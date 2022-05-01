@@ -1,0 +1,22 @@
+
+<div style="padding: 16px; font-size: 40px">
+  Score: {{currentValidGame.Score}}
+</div>
+
+
+<div style="padding: 16px;">
+  <button (click)="reset()">Reset</button>
+</div>
+
+<div style="display:flex; width: 100vw; padding: 16px">
+  <div *ngFor="let number of range(highestAvailableButton + 1); let i = index">
+    <button (click)="addNumberToRoll(i)">{{i}}</button>
+  </div>
+</div>
+
+
+<div style="display:flex; width: 100vw; flex-wrap: wrap">
+  <div *ngFor="let frame of currentValidGame.Frames">
+    <shared-frame [frame]="frame"></shared-frame>
+  </div>
+</div>

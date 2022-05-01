@@ -1,0 +1,39 @@
+.frame-outer-container {
+  width: 150px;
+  background-color: #b5daff;
+  margin: 15px;
+  border: #24292e 1px solid;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.frame-frame-number {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: #888888;
+  color: #24292e;
+  font-size: 12px;
+}
+
+.frame-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+
+  span {
+    padding: 15px;
+  }
+  .frame-rolls-left {
+    border-right: 1px solid #888888;
+  }
+}
+
+.frame-footer {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: #fcedbd;
+  color: #24292e;
+  font-size: 20px;
+}

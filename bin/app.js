@@ -16,10 +16,8 @@ app.get('/', (request, response, next) => {
 });
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-app.use('/game', game_router_1.GameRouter);
+app.use('/api/game', game_router_1.GameRouter);
 const server = app.listen(port, () => {
     console.log(`Server is running at localhost:${port}`);
 });
 exports.httpServer = server;
-// TODO update readme
-//      unit test

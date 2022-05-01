@@ -1,0 +1,13 @@
+<div *ngIf="frame != null" class="frame-outer-container">
+  <div class="frame-frame-number">
+    <h1>{{frame.FrameNumber}}</h1>
+  </div>
+  <div class="frame-body">
+    <span class="frame-rolls-left">{{frame.Rolls[0]}}</span>
+    <span >{{frame.Rolls[1]}}</span>
+    <span *ngIf="frame.Rolls[2]">{{frame.Rolls[2]}}</span>
+  </div>
+  <div class="frame-footer">
+    <p>+{{frame.Score}}</p>
+  </div>
+</div>

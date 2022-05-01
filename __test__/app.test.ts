@@ -35,7 +35,7 @@ describe('server test', ()=>{
 })
 
 describe('GameRouter-routes', ()=>{
-    const route: string = "/game"
+    const route: string = "/api/game"
 
     it('should check GameRouter up and responding', (done: DoneCallback) => {
         request(express)
