@@ -5,9 +5,6 @@ const express_1 = require("express");
 const scoring_service_1 = require("../utils/scoring.service");
 const router = (0, express_1.Router)();
 exports.GameRouter = router;
-router.get('/', (request, response, next) => {
-    response.send('this is game');
-});
 router.post('/score', (request, response, next) => {
     const rolls = request.body.Rolls;
     if (!scoring_service_1.ScoringService.validateRolls(rolls)) {

@@ -6,14 +6,10 @@ import {Game} from '../models/game.model';
 const router: core.Router = Router();
 
 
-router.get('/', (request: Request, response: Response, next: NextFunction) => {
-    response.send('this is game');
-})
-
 router.post('/score', (request: Request, response: Response, next: NextFunction) => {
     const rolls: number[] = request.body.Rolls;
     if (!ScoringService.validateRolls(rolls)){
-        return response.status(400).json({response: "Frame values are not valid."});
+        return response.status(400).json({response: "Rolls are not valid."});
     }
 
     const game: Game | null = ScoringService.calculateGame(rolls);

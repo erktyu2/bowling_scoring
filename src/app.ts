@@ -26,6 +26,3 @@ export {
     app as expressApp,
     server as httpServer
 };
-
-// TODO update readme
-//      unit test
