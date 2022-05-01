@@ -1,0 +1,20 @@
+.available-buttons{
+  display: flex;
+  width: 100vw;
+  padding: 16px;
+}
+
+.score {
+  padding: 16px;
+  font-size: 40px;
+}
+
+.reset {
+  padding: 16px;
+}
+
+.game{
+  display: flex;
+  width: 100vw;
+  flex-wrap: wrap;
+}

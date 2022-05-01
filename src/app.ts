@@ -21,7 +21,6 @@ const server = app.listen(port, () => {
     console.log(`Server is running at localhost:${port}`);
 });
 
-// this is required for unit tests
 export {
     app as expressApp,
     server as httpServer
