@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {Subscription} from 'rxjs';
 import {Game} from '../../models/game.model';
-import {Frame} from '../../../../../src/models/frame.model';
+import {Frame} from '../../models/frame.model';
 
 @Component({
   selector: 'app-home',
