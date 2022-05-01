@@ -115,6 +115,7 @@ export class ScoringService {
         return (!isLastFrame && totalKnockedPins > 10) ||
             (isLastFrame && totalKnockedPins > 10 && frame.Rolls.length < 3 && frame.Rolls[0] !== 10) ||
             (isLastFrame && totalKnockedPins > 30 && frame.Rolls.length === 3) ||
+            (isLastFrame && frame.Rolls.length === 3 && frame.Rolls[0] === 10 && frame.Rolls[1] !== 10 && (frame.Rolls[1] + frame.Rolls[2]) > 10) ||
             totalKnockedPins < 0 || !Number.isInteger(totalKnockedPins) ||
             (totalKnockedPins <= 11 && frame.Rolls.length > 2) || frame.Rolls.length > 3 ||
             (frame.Rolls.length > 2 && (frame.Rolls[0] + frame.Rolls[1]) < 10);

@@ -51,13 +51,24 @@ export class HomeComponent implements OnInit, OnDestroy {
         const lastFrame: Frame = returnedGame.Frames[returnedGame.Frames.length - 1];
         if (returnedGame.Frames.length === 10){
           const totalKnockedPins: number = lastFrame.Rolls.reduce(((previous, current) => current + previous), 0);
+
           if (lastFrame.Rolls.length === 3 || (totalKnockedPins < 10 && lastFrame.Rolls.length === 2)){
+
             this.highestAvailableButton = -1;
+
           } else if (lastFrame.Rolls.length === 1){
+
             this.highestAvailableButton = 10 - lastFrame.Rolls[0];
             this.highestAvailableButton = this.highestAvailableButton === 0 ? 10 : this.highestAvailableButton
+
           } else if (lastFrame.Rolls.length === 2){
-            this.highestAvailableButton = 10;
+
+            if ((lastFrame.Rolls[0] + lastFrame.Rolls[1]) === 10 || (lastFrame.Rolls[0] + lastFrame.Rolls[1]) === 20){
+              this.highestAvailableButton = 10;
+            } else if (lastFrame.Rolls[0] === 10){
+              this.highestAvailableButton = 10 - lastFrame.Rolls[1];
+              this.highestAvailableButton = this.highestAvailableButton === 0 ? 10 : this.highestAvailableButton
+            }
           }
 
         }else {
